@@ -1,9 +1,31 @@
+/*--------------------------------------------------------
+* UNIVERSIDAD DEL VALLE DE GUATEMALA
+* FACULTAD DE INGENIERÍA
+* DEPARTAMENTO DE CIENCIA DE LA COMPUTACIÓN
+* CC3086 Programación de microprocesadores
+* Proyecto 2: Temario 7 - Operaciones matemáticas extensas
+* 
+* Proyecto2.cpp
+* Original: Using OpenMP
+* Modificado por: 
+* Andy Fuentes 22944
+* Sergio Orellana 221122
+* Rodrigo Mancilla 22611
+* Brandon Reyes 22992
+* Fecha: 16/09/2023
+* Descripción: Cálculo de 12 sumatorias con sus respectivos límites y utilizar paralelismo para obtener el resultado de las
+* mismas e imprimir en pantalla el aviso de que el cálculo ha terminado. Presentar un reporte del tiempo que se necesitó para obtener cada resultado.
+* --------------------------------------------------------*/
+
+// Se incluyen las librerías necesarias
 #include <iostream>
 #include <omp.h>
 #include <chrono>
+#include <time.h>
 
 using namespace std;
 
+// Función para calcular el factorial de un número
 int calcularFactorial(int n) {
     int factorial = 1;
     for (int i = 2; i <= n; ++i) {
@@ -12,6 +34,8 @@ int calcularFactorial(int n) {
     return factorial;
 }
 
+// *Primera sumatoria: Sumatoria de factoriales*
+// Función para calcular la suma de factoriales en un rango determinado por el usuario
 void calcularSumatoriaFactorialesParalela(int limiteInferior, int limiteSuperior, int numHilos, int &resultado1) {
     resultado1 = 0;
 
@@ -32,6 +56,8 @@ void calcularSumatoriaFactorialesParalela(int limiteInferior, int limiteSuperior
     }
 }
 
+// *Segunda sumatoria: Sumatoria de potencias cuadradas*
+// Función para calcular la suma de potencias cuadradas en un rango determinado por el usuario
 void calcularSumatoriaPotenciasCuadradasParalela(int limiteInferior, int limiteSuperior, int numHilos, int &resultado2) {
     resultado2 = 0;
 
@@ -50,7 +76,8 @@ void calcularSumatoriaPotenciasCuadradasParalela(int limiteInferior, int limiteS
     }
 }
 
-// Funciones para calcular sumatorias adicionales
+// *Tercera sumatoria: Sumatoria de cubos*
+// Funciones para calcular sumatorias adicionales en un rango determinado por el usuario
 void calcularSumatoriaCubosParalela(int limiteInferior, int limiteSuperior, int numHilos, int &resultado3) {
     resultado3 = 0;
 
@@ -69,6 +96,8 @@ void calcularSumatoriaCubosParalela(int limiteInferior, int limiteSuperior, int 
     }
 }
 
+// *Cuarta sumatoria: Sumatoria de números pares*
+// Función para calcular la suma de números pares en un rango determinado por el usuario
 void calcularSumatoriaParesParalela(int limiteInferior, int limiteSuperior, int numHilos, int &resultado4) {
     resultado4 = 0;
 
@@ -89,6 +118,8 @@ void calcularSumatoriaParesParalela(int limiteInferior, int limiteSuperior, int 
     }
 }
 
+// *Quinta sumatoria: Sumatoria de impares*
+// Función para calcular la suma de números impares en un rango determinado por el usuario
 void calcularSumatoriaImparesParalela(int limiteInferior, int limiteSuperior, int numHilos, int &resultado) {
     resultado = 0;
 
@@ -109,6 +140,7 @@ void calcularSumatoriaImparesParalela(int limiteInferior, int limiteSuperior, in
     }
 }
 
+// Función para calcular la serie de Fibonacci
 int calcularFibonacci(int n) {
     if (n <= 0) return 0;
     if (n == 1) return 1;
@@ -125,6 +157,8 @@ int calcularFibonacci(int n) {
     return b; // Devuelve el último número de Fibonacci en lugar de la suma acumulativa
 }
 
+// *Sexta sumatoria: Sumatoria de fibonacci*
+// Función para calcular la suma de fibonacci en un rango determinado por el usuario
 void calcularSumatoriaFibonacciParalela(int limiteInferior, int limiteSuperior, int numHilos, int &resultado6) {
     resultado6 = 0;
 
@@ -143,6 +177,7 @@ void calcularSumatoriaFibonacciParalela(int limiteInferior, int limiteSuperior, 
     }
 }
 
+// Función para determinar si un número es primo
 bool esPrimo(int n) {
     if (n <= 1) return false;
     if (n <= 3) return true;
@@ -155,6 +190,8 @@ bool esPrimo(int n) {
     return true;
 }
 
+// *Séptima sumatoria: Sumatoria de números primos*
+// Función para calcular la suma de números primos en un rango determinado por el usuario
 void calcularSumatoriaPrimosParalela(int limiteInferior, int limiteSuperior, int numHilos, int &resultado7) {
     resultado7 = 0;
 
@@ -175,7 +212,8 @@ void calcularSumatoriaPrimosParalela(int limiteInferior, int limiteSuperior, int
     }
 }
 
-// Función para calcular la suma de números pares al cuadrado en un rango
+// *Octava sumatoria: Sumatoria de números pares al cuadrado*
+// Función para calcular la suma de números pares al cuadrado en un rango determinado por el usuario
 void calcularSumatoriaParesAlCuadradoParalela(int limiteInferior, int limiteSuperior, int numHilos, int &resultado8) {
     resultado8 = 0;
 
@@ -196,7 +234,8 @@ void calcularSumatoriaParesAlCuadradoParalela(int limiteInferior, int limiteSupe
     }
 }
 
-// Función para calcular la suma de números impares al cubo en un rango
+// *Novena sumatoria: Sumatoria de números impares al cubo*
+// Función para calcular la suma de números impares al cubo en un rango determinado por el usuario
 void calcularSumatoriaImparesAlCuboParalela(int limiteInferior, int limiteSuperior, int numHilos, int &resultado9) {
     resultado9 = 0;
 
@@ -217,7 +256,8 @@ void calcularSumatoriaImparesAlCuboParalela(int limiteInferior, int limiteSuperi
     }
 }
 
-// Función para calcular la suma de números pares al cubo en un rango
+// *Décima sumatoria: Sumatoria de números pares al cubo*
+// Función para calcular la suma de números pares al cubo en un rango determinado por el usuario
 void calcularSumatoriaParesAlCuboParalela(int limiteInferior, int limiteSuperior, int numHilos, int &resultado10) {
     resultado10 = 0;
 
@@ -238,7 +278,8 @@ void calcularSumatoriaParesAlCuboParalela(int limiteInferior, int limiteSuperior
     }
 }
 
-// Función para calcular la suma de números primos al cuadrado en un rango
+// *Undécima sumatoria: Sumatoria de números primos al cuadrado*
+// Función para calcular la suma de números primos al cuadrado en un rango determinado por el usuario
 void calcularSumatoriaPrimosAlCuadradoParalela(int limiteInferior, int limiteSuperior, int numHilos, int &resultado11) {
     resultado11 = 0;
 
@@ -258,7 +299,9 @@ void calcularSumatoriaPrimosAlCuadradoParalela(int limiteInferior, int limiteSup
         }
     }
 }
-// Función para calcular la suma de una secuencia aritmética en un rango
+
+// *Duodécima sumatoria: Sumatoria de una secuencia aritmética*
+// Función para calcular la suma de una secuencia aritmética en un rango determinado por el usuario
 void calcularSumatoriaSecuenciaAritmeticaParalela(int limiteInferior, int limiteSuperior, int numHilos, int &resultado12) {
     resultado12 = 0;
 
@@ -278,15 +321,16 @@ void calcularSumatoriaSecuenciaAritmeticaParalela(int limiteInferior, int limite
     }
 }
 
-
-
-
+// Función principal
 int main() {
+    // Se declaran las variables necesarias
     int limiteInferior, limiteSuperior, resultado1 = 0, resultado2 = 0, resultado3 = 0, resultado4 = 0, resultado5 = 0, resultado6 = 0, resultado7 = 0, resultado8 = 0, resultado9 = 0, resultado10 = 0, resultado11 = 0, resultados12 = 0;
     int numHilos;
+
+    // Se imprimen los mensajes de bienvenida y las sumatorias a calcular
     cout << endl;
     cout << "----------------------------------------" << endl;
-    cout << "Bienvenidos a las sumatorias" << endl;
+    cout << "Bienvenidos a las Operaciones matemáticas extensas." << endl;
     cout << "----------------------------------------" << endl;
     cout << endl;
     cout << "SUMATORIAS A CALCULAR: " << endl;
@@ -303,109 +347,163 @@ int main() {
     cout << "11. Sumatoria de números primos al cuadrado" << endl;
     cout << "12. Sumatoria de una secuencia aritmética" << endl;
     cout << endl;
-    // Agrega aquí más opciones para sumatorias adicionales
+
+    // Se piden los límites superior e inferior de las sumatorias
+    cout << "Ingrese el límite superior: ";
+    cin >> limiteSuperior;
+    cout << endl;
 
     cout << "Ingrese el límite inferior: " << endl;
     cin >> limiteInferior;
     cout << endl;
 
-    cout << "Ingrese el límite superior: ";
-    cin >> limiteSuperior;
-    cout << endl;
-
+    // Se pide el número de hilos
     cout << "Ingrese el número de hilos: ";
     cin >> numHilos;
     cout << endl;
 
-    auto start_time_factoriales = chrono::high_resolution_clock::now();
+    // Se calcula el tiempo de ejecución de cada sumatoria
+
+    //auto start_time_factoriales = high_resolution_clock::now();
+    clock_t start_time_factoriales = clock();
     calcularSumatoriaFactorialesParalela(limiteInferior, limiteSuperior, numHilos, resultado1);
-    auto end_time_factoriales = chrono::high_resolution_clock::now();
-    auto start_time_potencias_cuadradas = chrono::high_resolution_clock::now();
+    clock_t end_time_factoriales = clock();
+    //auto end_time_factoriales = high_resolution_clock::now();
+
+    //auto start_time_potencias_cuadradas = high_resolution_clock::now();
+    clock_t start_time_potencias_cuadradas = clock();
     calcularSumatoriaPotenciasCuadradasParalela(limiteInferior, limiteSuperior, numHilos, resultado2);
-    auto end_time_potencias_cuadradas = chrono::high_resolution_clock::now();
-    auto start_time_cubos = chrono::high_resolution_clock::now();
+    clock_t end_time_potencias_cuadradas = clock();
+    //auto end_time_potencias_cuadradas = high_resolution_clock::now();
+
+    //auto start_time_cubos = high_resolution_clock::now();
+    clock_t start_time_cubos = clock();
     calcularSumatoriaCubosParalela(limiteInferior, limiteSuperior, numHilos, resultado3);
-    auto end_time_cubos = chrono::high_resolution_clock::now();
-    auto start_time_pares = chrono::high_resolution_clock::now();
+    clock_t end_time_cubos = clock();
+    //auto end_time_cubos = high_resolution_clock::now();
+
+    //auto start_time_pares = high_resolution_clock::now();
+    clock_t start_time_pares = clock();
     calcularSumatoriaParesParalela(limiteInferior, limiteSuperior, numHilos, resultado4);
-    auto end_time_pares = chrono::high_resolution_clock::now();
-    auto start_time_impares = chrono::high_resolution_clock::now();
+    clock_t end_time_pares = clock();
+    //auto end_time_pares = high_resolution_clock::now();
+
+    //auto start_time_impares = high_resolution_clock::now();
+    clock_t start_time_impares = clock();
     calcularSumatoriaImparesParalela(limiteInferior, limiteSuperior, numHilos, resultado5);
-    auto end_time_impares = chrono::high_resolution_clock::now();
-    auto start_time_fibonacci = chrono::high_resolution_clock::now();
+    clock_t end_time_impares = clock();
+    //auto end_time_impares = high_resolution_clock::now();
+
+    //auto start_time_fibonacci = high_resolution_clock::now();
+    clock_t start_time_fibonacci = clock();
     calcularSumatoriaFibonacciParalela(limiteInferior, limiteSuperior, numHilos, resultado6);
-    auto end_time_fibonacci = chrono::high_resolution_clock::now();
-    auto start_time_primos = chrono::high_resolution_clock::now();
+    clock_t end_time_fibonacci = clock();
+    //auto end_time_fibonacci = high_resolution_clock::now();
+
+    //auto start_time_primos = high_resolution_clock::now();
+    clock_t start_time_primos = clock();
     calcularSumatoriaPrimosParalela(limiteInferior, limiteSuperior, numHilos, resultado7);
-    auto end_time_primos = chrono::high_resolution_clock::now();
-    auto start_time_pares_cuadrado = chrono::high_resolution_clock::now();
+    clock_t end_time_primos = clock();
+    //auto end_time_primos = high_resolution_clock::now();
+    
+    //auto start_time_pares_cuadrado = high_resolution_clock::now();
+    clock_t start_time_pares_cuadrado = clock();
     calcularSumatoriaParesAlCuadradoParalela(limiteInferior, limiteSuperior, numHilos, resultado8);
-    auto end_time_pares_cuadrado = chrono::high_resolution_clock::now();
-    auto start_time_impares_cubo = chrono::high_resolution_clock::now();
+    clock_t end_time_pares_cuadrado = clock();
+    //auto end_time_pares_cuadrado = high_resolution_clock::now();
+
+    //auto start_time_impares_cubo = high_resolution_clock::now();
+    clock_t start_time_impares_cubo = clock();
     calcularSumatoriaImparesAlCuboParalela(limiteInferior, limiteSuperior, numHilos, resultado9);
-    auto end_time_impares_cubo = chrono::high_resolution_clock::now();
-    auto start_time_pares_cubo = chrono::high_resolution_clock::now();
+    clock_t end_time_impares_cubo = clock();
+    //auto end_time_impares_cubo = high_resolution_clock::now();
+
+    //auto start_time_pares_cubo = high_resolution_clock::now();
+    clock_t start_time_pares_cubo = clock();
     calcularSumatoriaParesAlCuboParalela(limiteInferior, limiteSuperior, numHilos, resultado10);
-    auto end_time_pares_cubo = chrono::high_resolution_clock::now();
-    auto start_time_primos_cuadrado = chrono::high_resolution_clock::now();
+    clock_t end_time_pares_cubo = clock();
+    //auto end_time_pares_cubo = high_resolution_clock::now();
+
+    //auto start_time_primos_cuadrado = high_resolution_clock::now();
+    clock_t start_time_primos_cuadrado = clock();
     calcularSumatoriaPrimosAlCuadradoParalela(limiteInferior, limiteSuperior, numHilos, resultado11);
-    auto end_time_primos_cuadrado = chrono::high_resolution_clock::now();
-    auto start_time_secuencia_aritmetica = chrono::high_resolution_clock::now();
+    clock_t end_time_primos_cuadrado = clock();
+    //auto end_time_primos_cuadrado = high_resolution_clock::now();
+
+    //auto start_time_secuencia_aritmetica = high_resolution_clock::now();
+    clock_t start_time_secuencia_aritmetica = clock();
     calcularSumatoriaSecuenciaAritmeticaParalela(limiteInferior, limiteSuperior, numHilos, resultados12);
-    auto end_time_secuencia_aritmetica = chrono::high_resolution_clock::now();
+    clock_t end_time_secuencia_aritmetica = clock();
+    //auto end_time_secuencia_aritmetica = high_resolution_clock::now();
+
+    #pragma omp barrier
+    /*
+    auto duration_factoriales = duration_cast<microseconds>(end_time_factoriales - start_time_factoriales);
+    auto duration_potencias_cuadradas = duration_cast<microseconds>(end_time_potencias_cuadradas - start_time_potencias_cuadradas);
+    auto duration_cubos = duration_cast<microseconds>(end_time_cubos - start_time_cubos);
+    auto duration_pares = duration_cast<microseconds>(end_time_pares - start_time_pares);
+    auto duration_impares = duration_cast<microseconds>(end_time_impares - start_time_impares);
+    auto duration_fibonacci = duration_cast<microseconds>(end_time_fibonacci - start_time_fibonacci);
+    auto duration_primos = duration_cast<microseconds>(end_time_primos - start_time_primos);
+    auto duration_pares_cuadrado = duration_cast<microseconds>(end_time_pares_cuadrado - start_time_pares_cuadrado);
+    auto duration_impares_cubo = duration_cast<microseconds>(end_time_impares_cubo - start_time_impares_cubo);
+    auto duration_pares_cubo = duration_cast<microseconds>(end_time_pares_cubo - start_time_pares_cubo);
+    auto duration_primos_cuadrado = duration_cast<microseconds>(end_time_primos_cuadrado - start_time_primos_cuadrado);
+    auto duration_secuencia_aritmetica = duration_cast<microseconds>(end_time_secuencia_aritmetica - start_time_secuencia_aritmetica);
+    */
+
+   // Se calcula el tiempo de ejecución de cada sumatoria
+    double elapsed_time_factoriales = (double)(end_time_factoriales - start_time_factoriales) / CLOCKS_PER_SEC;
+    double duration_potencias_cuadradas = (double)(end_time_potencias_cuadradas - start_time_potencias_cuadradas) / CLOCKS_PER_SEC;
+    double duration_cubos = (double)(end_time_cubos - start_time_cubos) / CLOCKS_PER_SEC;
+    double duration_pares = (double)(end_time_pares - start_time_pares) / CLOCKS_PER_SEC;
+    double duration_impares = (double)(end_time_impares - start_time_impares) / CLOCKS_PER_SEC;
+    double duration_fibonacci = (double)(end_time_fibonacci - start_time_fibonacci) / CLOCKS_PER_SEC;
+    double duration_primos = (double)(end_time_primos - start_time_primos) / CLOCKS_PER_SEC;
+    double duration_pares_cuadrado = (double)(end_time_pares_cuadrado - start_time_pares_cuadrado) / CLOCKS_PER_SEC;
+    double duration_impares_cubo = (double)(end_time_impares_cubo - start_time_impares_cubo) / CLOCKS_PER_SEC;
+    double duration_pares_cubo = (double)(end_time_pares_cubo - start_time_pares_cubo) / CLOCKS_PER_SEC;
+    double duration_primos_cuadrado = (double)(end_time_primos_cuadrado - start_time_primos_cuadrado) / CLOCKS_PER_SEC;
+    double duration_secuencia_aritmetica = (double)(end_time_secuencia_aritmetica - start_time_secuencia_aritmetica) / CLOCKS_PER_SEC;
 
     #pragma omp barrier
 
-    auto duration_factoriales = chrono::duration_cast<chrono::microseconds>(end_time_factoriales - start_time_factoriales);
-    auto duration_potencias_cuadradas = chrono::duration_cast<chrono::microseconds>(end_time_potencias_cuadradas - start_time_potencias_cuadradas);
-    auto duration_cubos = chrono::duration_cast<chrono::microseconds>(end_time_cubos - start_time_cubos);
-    auto duration_pares = chrono::duration_cast<chrono::microseconds>(end_time_pares - start_time_pares);
-    auto duration_impares = chrono::duration_cast<chrono::microseconds>(end_time_impares - start_time_impares);
-    auto duration_fibonacci = chrono::duration_cast<chrono::microseconds>(end_time_fibonacci - start_time_fibonacci);
-    auto duration_primos = chrono::duration_cast<chrono::microseconds>(end_time_primos - start_time_primos);
-    auto duration_pares_cuadrado = chrono::duration_cast<chrono::microseconds>(end_time_pares_cuadrado - start_time_pares_cuadrado);
-    auto duration_impares_cubo = chrono::duration_cast<chrono::microseconds>(end_time_impares_cubo - start_time_impares_cubo);
-    auto duration_pares_cubo = chrono::duration_cast<chrono::microseconds>(end_time_pares_cubo - start_time_pares_cubo);
-    auto duration_primos_cuadrado = chrono::duration_cast<chrono::microseconds>(end_time_primos_cuadrado - start_time_primos_cuadrado);
-    auto duration_secuencia_aritmetica = chrono::duration_cast<chrono::microseconds>(end_time_secuencia_aritmetica - start_time_secuencia_aritmetica);
-
-    #pragma omp barrier
-
+    // Se imprimen los avisos o mensajes de todos los calculos terminados
     cout << "La sumatoria de factoriales de " << limiteInferior << " a " << limiteSuperior << " es: " << resultado1 << endl;
-    cout << "Tiempo de cálculo de factoriales: " << duration_factoriales.count() << " microseconds" << endl;
+    cout << "Tiempo de cálculo de factoriales: " << elapsed_time_factoriales << " segundos" << endl;
     cout << endl;
     cout << "La sumatoria de potencias cuadradas de " << limiteInferior << " a " << limiteSuperior << " es: " << resultado2 << endl;
-    cout << "Tiempo de cálculo de potencias cuadradas: " << duration_potencias_cuadradas.count() << " microseconds" << endl;
+    cout << "Tiempo de cálculo de potencias cuadradas: " << duration_potencias_cuadradas << " segundos" << endl;
     cout << endl;
     cout << "La sumatoria de cubos de " << limiteInferior << " a " << limiteSuperior << " es: " << resultado3 << endl;
-    cout << "Tiempo de cálculo de cubos: " << duration_cubos.count() << " microseconds" << endl;
+    cout << "Tiempo de cálculo de cubos: " << duration_cubos << " segundos" << endl;
     cout << endl;
     cout << "La sumatoria de números pares de " << limiteInferior << " a " << limiteSuperior << " es: " << resultado4 << endl;
-    cout << "Tiempo de cálculo de números pares: " << duration_pares.count() << " microseconds" << endl;
+    cout << "Tiempo de cálculo de números pares: " << duration_pares << " segundos" << endl;
     cout << endl;
     cout << "La sumatoria de números impares de " << limiteInferior << " a " << limiteSuperior << " es: " << resultado5 << endl;
-    cout << "Tiempo de cálculo de números impares: " << duration_impares.count() << " microseconds" << endl;
+    cout << "Tiempo de cálculo de números impares: " << duration_impares << " segundos" << endl;
     cout << endl;
     cout << "La sumatoria de fibonacci de " << limiteInferior << " a " << limiteSuperior << " es: " << resultado6 << endl;
-    cout << "Tiempo de cálculo de fibonacci: " << duration_fibonacci.count() << " microseconds" << endl;
+    cout << "Tiempo de cálculo de fibonacci: " << duration_fibonacci << " segundos" << endl;
     cout << endl;
     cout << "La sumatoria de números primos de " << limiteInferior << " a " << limiteSuperior << " es: " << resultado7 << endl;
-    cout << "Tiempo de cálculo de números primos: " << duration_primos.count() << " microseconds" << endl;
+    cout << "Tiempo de cálculo de números primos: " << duration_primos << " segundos" << endl;
     cout << endl;
     cout << "La sumatoria de números pares al cuadrado de " << limiteInferior << " a " << limiteSuperior << " es: " << resultado8 << endl;
-    cout << "Tiempo de cálculo de números pares al cuadrado: " << duration_pares_cuadrado.count() << " microseconds" << endl;
+    cout << "Tiempo de cálculo de números pares al cuadrado: " << duration_pares_cuadrado << " segundos" << endl;
     cout << endl;
     cout << "La sumatoria de números impares al cubo de " << limiteInferior << " a " << limiteSuperior << " es: " << resultado9 << endl;
-    cout << "Tiempo de cálculo de números impares al cubo: " << duration_impares_cubo.count() << " microseconds" << endl;
+    cout << "Tiempo de cálculo de números impares al cubo: " << duration_impares_cubo << " segundos" << endl;
     cout << endl;
     cout << "La sumatoria de números pares al cubo de " << limiteInferior << " a " << limiteSuperior << " es: " << resultado10 << endl;
-    cout << "Tiempo de cálculo de números pares al cubo: " << duration_pares_cubo.count() << " microseconds" << endl;
+    cout << "Tiempo de cálculo de números pares al cubo: " << duration_pares_cubo << " segundos" << endl;
     cout << endl;
     cout << "La sumatoria de números primos al cuadrado de " << limiteInferior << " a " << limiteSuperior << " es: " << resultado11 << endl;
-    cout << "Tiempo de cálculo de números primos al cuadrado: " << duration_primos_cuadrado.count() << " microseconds" << endl;
+    cout << "Tiempo de cálculo de números primos al cuadrado: " << duration_primos_cuadrado << " segundos" << endl;
     cout << endl;
     cout << "La sumatoria de una secuencia aritmética de " << limiteInferior << " a " << limiteSuperior << " es: " << resultados12 << endl;
-    cout << "Tiempo de cálculo de una secuencia aritmética: " << duration_secuencia_aritmetica.count() << " microseconds" << endl;
+    cout << "Tiempo de cálculo de una secuencia aritmética: " << duration_secuencia_aritmetica << " segundos" << endl;
     cout << endl;
     return 0;
 }
