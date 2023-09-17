@@ -120,8 +120,8 @@ void calcularSumatoriaParesParalela(int limiteInferior, int limiteSuperior, int 
 
 // *Quinta sumatoria: Sumatoria de impares*
 // Función para calcular la suma de números impares en un rango determinado por el usuario
-void calcularSumatoriaImparesParalela(int limiteInferior, int limiteSuperior, int numHilos, int &resultado) {
-    resultado = 0;
+void calcularSumatoriaImparesParalela(int limiteInferior, int limiteSuperior, int numHilos, int &resultado5) {
+    resultado5 = 0;
 
     #pragma omp parallel num_threads(numHilos) reduction(+:resultado)
     {
@@ -134,7 +134,7 @@ void calcularSumatoriaImparesParalela(int limiteInferior, int limiteSuperior, in
 
         for (int i = inicio; i <= fin; ++i) {
             if (i % 2 != 0) {
-                resultado += i; // Suma números impares
+                resultado5 += i; // Suma números impares
             }
         }
     }
