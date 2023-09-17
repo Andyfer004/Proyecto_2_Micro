@@ -364,93 +364,55 @@ int main() {
 
     // Se calcula el tiempo de ejecución de cada sumatoria
 
-    //auto start_time_factoriales = high_resolution_clock::now();
     clock_t start_time_factoriales = clock();
     calcularSumatoriaFactorialesParalela(limiteInferior, limiteSuperior, numHilos, resultado1);
     clock_t end_time_factoriales = clock();
-    //auto end_time_factoriales = high_resolution_clock::now();
 
-    //auto start_time_potencias_cuadradas = high_resolution_clock::now();
     clock_t start_time_potencias_cuadradas = clock();
     calcularSumatoriaPotenciasCuadradasParalela(limiteInferior, limiteSuperior, numHilos, resultado2);
     clock_t end_time_potencias_cuadradas = clock();
-    //auto end_time_potencias_cuadradas = high_resolution_clock::now();
 
-    //auto start_time_cubos = high_resolution_clock::now();
     clock_t start_time_cubos = clock();
     calcularSumatoriaCubosParalela(limiteInferior, limiteSuperior, numHilos, resultado3);
     clock_t end_time_cubos = clock();
-    //auto end_time_cubos = high_resolution_clock::now();
 
-    //auto start_time_pares = high_resolution_clock::now();
     clock_t start_time_pares = clock();
     calcularSumatoriaParesParalela(limiteInferior, limiteSuperior, numHilos, resultado4);
     clock_t end_time_pares = clock();
-    //auto end_time_pares = high_resolution_clock::now();
 
-    //auto start_time_impares = high_resolution_clock::now();
     clock_t start_time_impares = clock();
     calcularSumatoriaImparesParalela(limiteInferior, limiteSuperior, numHilos, resultado5);
     clock_t end_time_impares = clock();
-    //auto end_time_impares = high_resolution_clock::now();
 
-    //auto start_time_fibonacci = high_resolution_clock::now();
     clock_t start_time_fibonacci = clock();
     calcularSumatoriaFibonacciParalela(limiteInferior, limiteSuperior, numHilos, resultado6);
     clock_t end_time_fibonacci = clock();
-    //auto end_time_fibonacci = high_resolution_clock::now();
 
-    //auto start_time_primos = high_resolution_clock::now();
     clock_t start_time_primos = clock();
     calcularSumatoriaPrimosParalela(limiteInferior, limiteSuperior, numHilos, resultado7);
     clock_t end_time_primos = clock();
-    //auto end_time_primos = high_resolution_clock::now();
     
-    //auto start_time_pares_cuadrado = high_resolution_clock::now();
     clock_t start_time_pares_cuadrado = clock();
     calcularSumatoriaParesAlCuadradoParalela(limiteInferior, limiteSuperior, numHilos, resultado8);
     clock_t end_time_pares_cuadrado = clock();
-    //auto end_time_pares_cuadrado = high_resolution_clock::now();
 
-    //auto start_time_impares_cubo = high_resolution_clock::now();
     clock_t start_time_impares_cubo = clock();
     calcularSumatoriaImparesAlCuboParalela(limiteInferior, limiteSuperior, numHilos, resultado9);
     clock_t end_time_impares_cubo = clock();
-    //auto end_time_impares_cubo = high_resolution_clock::now();
 
-    //auto start_time_pares_cubo = high_resolution_clock::now();
     clock_t start_time_pares_cubo = clock();
     calcularSumatoriaParesAlCuboParalela(limiteInferior, limiteSuperior, numHilos, resultado10);
     clock_t end_time_pares_cubo = clock();
-    //auto end_time_pares_cubo = high_resolution_clock::now();
 
-    //auto start_time_primos_cuadrado = high_resolution_clock::now();
     clock_t start_time_primos_cuadrado = clock();
     calcularSumatoriaPrimosAlCuadradoParalela(limiteInferior, limiteSuperior, numHilos, resultado11);
     clock_t end_time_primos_cuadrado = clock();
-    //auto end_time_primos_cuadrado = high_resolution_clock::now();
 
-    //auto start_time_secuencia_aritmetica = high_resolution_clock::now();
     clock_t start_time_secuencia_aritmetica = clock();
     calcularSumatoriaSecuenciaAritmeticaParalela(limiteInferior, limiteSuperior, numHilos, resultados12);
     clock_t end_time_secuencia_aritmetica = clock();
-    //auto end_time_secuencia_aritmetica = high_resolution_clock::now();
 
     #pragma omp barrier
-    /*
-    auto duration_factoriales = duration_cast<microseconds>(end_time_factoriales - start_time_factoriales);
-    auto duration_potencias_cuadradas = duration_cast<microseconds>(end_time_potencias_cuadradas - start_time_potencias_cuadradas);
-    auto duration_cubos = duration_cast<microseconds>(end_time_cubos - start_time_cubos);
-    auto duration_pares = duration_cast<microseconds>(end_time_pares - start_time_pares);
-    auto duration_impares = duration_cast<microseconds>(end_time_impares - start_time_impares);
-    auto duration_fibonacci = duration_cast<microseconds>(end_time_fibonacci - start_time_fibonacci);
-    auto duration_primos = duration_cast<microseconds>(end_time_primos - start_time_primos);
-    auto duration_pares_cuadrado = duration_cast<microseconds>(end_time_pares_cuadrado - start_time_pares_cuadrado);
-    auto duration_impares_cubo = duration_cast<microseconds>(end_time_impares_cubo - start_time_impares_cubo);
-    auto duration_pares_cubo = duration_cast<microseconds>(end_time_pares_cubo - start_time_pares_cubo);
-    auto duration_primos_cuadrado = duration_cast<microseconds>(end_time_primos_cuadrado - start_time_primos_cuadrado);
-    auto duration_secuencia_aritmetica = duration_cast<microseconds>(end_time_secuencia_aritmetica - start_time_secuencia_aritmetica);
-    */
 
    // Se calcula el tiempo de ejecución de cada sumatoria
     double elapsed_time_factoriales = (double)(end_time_factoriales - start_time_factoriales) / CLOCKS_PER_SEC;
