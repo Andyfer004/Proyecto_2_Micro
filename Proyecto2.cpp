@@ -21,14 +21,16 @@
 #include <iostream>
 #include <omp.h>
 #include <chrono>
+#include <string>
 #include <time.h>
+#include <cctype>
 
 using namespace std;
 
 // Función para calcular el factorial de un número
-int calcularFactorial(int n) {
-    int factorial = 1;
-    for (int i = 2; i <= n; ++i) {
+long long calcularFactorial(long long n) {
+    long long factorial = 1;
+    for (long long i = 2; i <= n; ++i) {
         factorial *= i;
     }
     return factorial;
@@ -36,20 +38,20 @@ int calcularFactorial(int n) {
 
 // *Primera sumatoria: Sumatoria de factoriales*
 // Función para calcular la suma de factoriales en un rango determinado por el usuario
-void calcularSumatoriaFactorialesParalela(int limiteInferior, int limiteSuperior, int numHilos, int &resultado1) {
+void calcularSumatoriaFactorialesParalela(long long limiteInferior, long long limiteSuperior, long long numHilos, long long &resultado1) {
     resultado1 = 0;
 
     #pragma omp parallel num_threads(numHilos) reduction(+:resultado1)
     {
-        int tid = omp_get_thread_num();
-        int num_threads = omp_get_num_threads();
+        long long tid = omp_get_thread_num();
+        long long num_threads = omp_get_num_threads();
 
-        int tamanoSubrango = (limiteSuperior - limiteInferior + 1 + num_threads - 1) / num_threads;
-        int inicio = limiteInferior + tid * tamanoSubrango;
-        int fin = min(inicio + tamanoSubrango - 1, limiteSuperior);
+        long long tamanoSubrango = (limiteSuperior - limiteInferior + 1 + num_threads - 1) / num_threads;
+        long long inicio = limiteInferior + tid * tamanoSubrango;
+        long long fin = min(inicio + tamanoSubrango - 1, limiteSuperior);
 
-        for (int i = inicio; i <= fin; ++i) {
-            int factorial_i = calcularFactorial(i);
+        for (long long i = inicio; i <= fin; ++i) {
+            long long factorial_i = calcularFactorial(i);
             #pragma omp critical
             resultado1 += factorial_i;
         }
@@ -58,19 +60,19 @@ void calcularSumatoriaFactorialesParalela(int limiteInferior, int limiteSuperior
 
 // *Segunda sumatoria: Sumatoria de potencias cuadradas*
 // Función para calcular la suma de potencias cuadradas en un rango determinado por el usuario
-void calcularSumatoriaPotenciasCuadradasParalela(int limiteInferior, int limiteSuperior, int numHilos, int &resultado2) {
+void calcularSumatoriaPotenciasCuadradasParalela(long long limiteInferior, long long limiteSuperior, long long numHilos, long long &resultado2) {
     resultado2 = 0;
 
     #pragma omp parallel num_threads(numHilos) reduction(+:resultado2)
     {
-        int tid = omp_get_thread_num();
-        int num_threads = omp_get_num_threads();
+        long long tid = omp_get_thread_num();
+        long long num_threads = omp_get_num_threads();
 
-        int tamanoSubrango = (limiteSuperior - limiteInferior + 1 + num_threads - 1) / num_threads;
-        int inicio = limiteInferior + tid * tamanoSubrango;
-        int fin = min(inicio + tamanoSubrango - 1, limiteSuperior);
+        long long tamanoSubrango = (limiteSuperior - limiteInferior + 1 + num_threads - 1) / num_threads;
+        long long inicio = limiteInferior + tid * tamanoSubrango;
+        long long fin = min(inicio + tamanoSubrango - 1, limiteSuperior);
 
-        for (int i = inicio; i <= fin; ++i) {
+        for (long long i = inicio; i <= fin; ++i) {
             resultado2 += i * i; // Calcula la potencia cuadrada y la suma
         }
     }
@@ -78,19 +80,19 @@ void calcularSumatoriaPotenciasCuadradasParalela(int limiteInferior, int limiteS
 
 // *Tercera sumatoria: Sumatoria de cubos*
 // Funciones para calcular sumatorias adicionales en un rango determinado por el usuario
-void calcularSumatoriaCubosParalela(int limiteInferior, int limiteSuperior, int numHilos, int &resultado3) {
+void calcularSumatoriaCubosParalela(long long limiteInferior, long long limiteSuperior, long long numHilos, long long &resultado3) {
     resultado3 = 0;
 
     #pragma omp parallel num_threads(numHilos) reduction(+:resultado3)
     {
-        int tid = omp_get_thread_num();
-        int num_threads = omp_get_num_threads();
+        long long tid = omp_get_thread_num();
+        long long num_threads = omp_get_num_threads();
 
-        int tamanoSubrango = (limiteSuperior - limiteInferior + 1 + num_threads - 1) / num_threads;
-        int inicio = limiteInferior + tid * tamanoSubrango;
-        int fin = min(inicio + tamanoSubrango - 1, limiteSuperior);
+        long long tamanoSubrango = (limiteSuperior - limiteInferior + 1 + num_threads - 1) / num_threads;
+        long long inicio = limiteInferior + tid * tamanoSubrango;
+        long long fin = min(inicio + tamanoSubrango - 1, limiteSuperior);
 
-        for (int i = inicio; i <= fin; ++i) {
+        for (long long i = inicio; i <= fin; ++i) {
             resultado3 += i * i * i; // Calcula el cubo y la suma
         }
     }
@@ -98,19 +100,19 @@ void calcularSumatoriaCubosParalela(int limiteInferior, int limiteSuperior, int 
 
 // *Cuarta sumatoria: Sumatoria de números pares*
 // Función para calcular la suma de números pares en un rango determinado por el usuario
-void calcularSumatoriaParesParalela(int limiteInferior, int limiteSuperior, int numHilos, int &resultado4) {
+void calcularSumatoriaParesParalela(long long limiteInferior, long long limiteSuperior, long long numHilos, long long &resultado4) {
     resultado4 = 0;
 
     #pragma omp parallel num_threads(numHilos) reduction(+:resultado4)
     {
-        int tid = omp_get_thread_num();
-        int num_threads = omp_get_num_threads();
+        long long tid = omp_get_thread_num();
+        long long num_threads = omp_get_num_threads();
 
-        int tamanoSubrango = (limiteSuperior - limiteInferior + 1 + num_threads - 1) / num_threads;
-        int inicio = limiteInferior + tid * tamanoSubrango;
-        int fin = min(inicio + tamanoSubrango - 1, limiteSuperior);
+        long long tamanoSubrango = (limiteSuperior - limiteInferior + 1 + num_threads - 1) / num_threads;
+        long long inicio = limiteInferior + tid * tamanoSubrango;
+        long long fin = min(inicio + tamanoSubrango - 1, limiteSuperior);
 
-        for (int i = inicio; i <= fin; ++i) {
+        for (long long i = inicio; i <= fin; ++i) {
             if (i % 2 == 0) {
                 resultado4 += i; // Suma números pares
             }
@@ -118,21 +120,21 @@ void calcularSumatoriaParesParalela(int limiteInferior, int limiteSuperior, int 
     }
 }
 
-// *Quinta sumatoria: Sumatoria de impares*
+// *Qulong longa sumatoria: Sumatoria de impares*
 // Función para calcular la suma de números impares en un rango determinado por el usuario
-void calcularSumatoriaImparesParalela(int limiteInferior, int limiteSuperior, int numHilos, int &resultado5) {
+void calcularSumatoriaImparesParalela(long long limiteInferior, long long limiteSuperior, long long numHilos, long long &resultado5) {
     resultado5 = 0;
 
     #pragma omp parallel num_threads(numHilos) reduction(+:resultado5)
     {
-        int tid = omp_get_thread_num();
-        int num_threads = omp_get_num_threads();
+        long long tid = omp_get_thread_num();
+        long long num_threads = omp_get_num_threads();
 
-        int tamanoSubrango = (limiteSuperior - limiteInferior + 1 + num_threads - 1) / num_threads;
-        int inicio = limiteInferior + tid * tamanoSubrango;
-        int fin = min(inicio + tamanoSubrango - 1, limiteSuperior);
+        long long tamanoSubrango = (limiteSuperior - limiteInferior + 1 + num_threads - 1) / num_threads;
+        long long inicio = limiteInferior + tid * tamanoSubrango;
+        long long fin = min(inicio + tamanoSubrango - 1, limiteSuperior);
 
-        for (int i = inicio; i <= fin; ++i) {
+        for (long long i = inicio; i <= fin; ++i) {
             if (i % 2 != 0) {
                 resultado5 += i; // Suma números impares
             }
@@ -141,14 +143,14 @@ void calcularSumatoriaImparesParalela(int limiteInferior, int limiteSuperior, in
 }
 
 // Función para calcular la serie de Fibonacci
-int calcularFibonacci(int n) {
+long long calcularFibonacci(long long n) {
     if (n <= 0) return 0;
     if (n == 1) return 1;
 
-    int a = 0, b = 1, c;
-    int suma = 1;
+    long long a = 0, b = 1, c;
+    long long suma = 1;
 
-    for (int i = 2; i <= n; ++i) {
+    for (long long i = 2; i <= n; ++i) {
         c = a + b;
         a = b;
         b = c;
@@ -159,31 +161,31 @@ int calcularFibonacci(int n) {
 
 // *Sexta sumatoria: Sumatoria de fibonacci*
 // Función para calcular la suma de fibonacci en un rango determinado por el usuario
-void calcularSumatoriaFibonacciParalela(int limiteInferior, int limiteSuperior, int numHilos, int &resultado6) {
+void calcularSumatoriaFibonacciParalela(long long limiteInferior, long long limiteSuperior, long long numHilos, long long &resultado6) {
     resultado6 = 0;
 
     #pragma omp parallel num_threads(numHilos) reduction(+:resultado6)
     {
-        int tid = omp_get_thread_num();
-        int num_threads = omp_get_num_threads();
+        long long tid = omp_get_thread_num();
+        long long num_threads = omp_get_num_threads();
 
-        int tamanoSubrango = (limiteSuperior - limiteInferior + 1 + num_threads - 1) / num_threads;
-        int inicio = limiteInferior + tid * tamanoSubrango;
-        int fin = min(inicio + tamanoSubrango - 1, limiteSuperior);
+        long long tamanoSubrango = (limiteSuperior - limiteInferior + 1 + num_threads - 1) / num_threads;
+        long long inicio = limiteInferior + tid * tamanoSubrango;
+        long long fin = min(inicio + tamanoSubrango - 1, limiteSuperior);
 
-        for (int i = inicio; i <= fin; ++i) {
+        for (long long i = inicio; i <= fin; ++i) {
             resultado6 += calcularFibonacci(i);
         }
     }
 }
 
 // Función para determinar si un número es primo
-bool esPrimo(int n) {
+bool esPrimo(long long n) {
     if (n <= 1) return false;
     if (n <= 3) return true;
     if (n % 2 == 0 || n % 3 == 0) return false;
 
-    for (int i = 5; i * i <= n; i += 6) {
+    for (long long i = 5; i * i <= n; i += 6) {
         if (n % i == 0 || n % (i + 2) == 0) return false;
     }
 
@@ -192,19 +194,19 @@ bool esPrimo(int n) {
 
 // *Séptima sumatoria: Sumatoria de números primos*
 // Función para calcular la suma de números primos en un rango determinado por el usuario
-void calcularSumatoriaPrimosParalela(int limiteInferior, int limiteSuperior, int numHilos, int &resultado7) {
+void calcularSumatoriaPrimosParalela(long long limiteInferior, long long limiteSuperior, long long numHilos, long long &resultado7) {
     resultado7 = 0;
 
     #pragma omp parallel num_threads(numHilos) reduction(+:resultado7)
     {
-        int tid = omp_get_thread_num();
-        int num_threads = omp_get_num_threads();
+        long long tid = omp_get_thread_num();
+        long long num_threads = omp_get_num_threads();
 
-        int tamanoSubrango = (limiteSuperior - limiteInferior + 1 + num_threads - 1) / num_threads;
-        int inicio = limiteInferior + tid * tamanoSubrango;
-        int fin = min(inicio + tamanoSubrango - 1, limiteSuperior);
+        long long tamanoSubrango = (limiteSuperior - limiteInferior + 1 + num_threads - 1) / num_threads;
+        long long inicio = limiteInferior + tid * tamanoSubrango;
+        long long fin = min(inicio + tamanoSubrango - 1, limiteSuperior);
 
-        for (int i = inicio; i <= fin; ++i) {
+        for (long long i = inicio; i <= fin; ++i) {
             if (esPrimo(i)) {
                 resultado7 += i; // Suma números primos
             }
@@ -214,19 +216,19 @@ void calcularSumatoriaPrimosParalela(int limiteInferior, int limiteSuperior, int
 
 // *Octava sumatoria: Sumatoria de números pares al cuadrado*
 // Función para calcular la suma de números pares al cuadrado en un rango determinado por el usuario
-void calcularSumatoriaParesAlCuadradoParalela(int limiteInferior, int limiteSuperior, int numHilos, int &resultado8) {
+void calcularSumatoriaParesAlCuadradoParalela(long long limiteInferior, long long limiteSuperior, long long numHilos, long long &resultado8) {
     resultado8 = 0;
 
     #pragma omp parallel num_threads(numHilos) reduction(+:resultado8)
     {
-        int tid = omp_get_thread_num();
-        int num_threads = omp_get_num_threads();
+        long long tid = omp_get_thread_num();
+        long long num_threads = omp_get_num_threads();
 
-        int tamanoSubrango = (limiteSuperior - limiteInferior + 1 + num_threads - 1) / num_threads;
-        int inicio = limiteInferior + tid * tamanoSubrango;
-        int fin = min(inicio + tamanoSubrango - 1, limiteSuperior);
+        long long tamanoSubrango = (limiteSuperior - limiteInferior + 1 + num_threads - 1) / num_threads;
+        long long inicio = limiteInferior + tid * tamanoSubrango;
+        long long fin = min(inicio + tamanoSubrango - 1, limiteSuperior);
 
-        for (int i = inicio; i <= fin; ++i) {
+        for (long long i = inicio; i <= fin; ++i) {
             if (i % 2 == 0) {
                 resultado8 += i * i; // Suma el cuadrado de números pares
             }
@@ -236,19 +238,19 @@ void calcularSumatoriaParesAlCuadradoParalela(int limiteInferior, int limiteSupe
 
 // *Novena sumatoria: Sumatoria de números impares al cubo*
 // Función para calcular la suma de números impares al cubo en un rango determinado por el usuario
-void calcularSumatoriaImparesAlCuboParalela(int limiteInferior, int limiteSuperior, int numHilos, int &resultado9) {
+void calcularSumatoriaImparesAlCuboParalela(long long limiteInferior, long long limiteSuperior, long long numHilos, long long &resultado9) {
     resultado9 = 0;
 
     #pragma omp parallel num_threads(numHilos) reduction(+:resultado9)
     {
-        int tid = omp_get_thread_num();
-        int num_threads = omp_get_num_threads();
+        long long tid = omp_get_thread_num();
+        long long num_threads = omp_get_num_threads();
 
-        int tamanoSubrango = (limiteSuperior - limiteInferior + 1 + num_threads - 1) / num_threads;
-        int inicio = limiteInferior + tid * tamanoSubrango;
-        int fin = min(inicio + tamanoSubrango - 1, limiteSuperior);
+        long long tamanoSubrango = (limiteSuperior - limiteInferior + 1 + num_threads - 1) / num_threads;
+        long long inicio = limiteInferior + tid * tamanoSubrango;
+        long long fin = min(inicio + tamanoSubrango - 1, limiteSuperior);
 
-        for (int i = inicio; i <= fin; ++i) {
+        for (long long i = inicio; i <= fin; ++i) {
             if (i % 2 != 0) {
                 resultado9 += i * i * i; // Suma el cubo de números impares
             }
@@ -258,19 +260,19 @@ void calcularSumatoriaImparesAlCuboParalela(int limiteInferior, int limiteSuperi
 
 // *Décima sumatoria: Sumatoria de números pares al cubo*
 // Función para calcular la suma de números pares al cubo en un rango determinado por el usuario
-void calcularSumatoriaParesAlCuboParalela(int limiteInferior, int limiteSuperior, int numHilos, int &resultado10) {
+void calcularSumatoriaParesAlCuboParalela(long long limiteInferior, long long limiteSuperior, long long numHilos, long long &resultado10) {
     resultado10 = 0;
 
     #pragma omp parallel num_threads(numHilos) reduction(+:resultado10)
     {
-        int tid = omp_get_thread_num();
-        int num_threads = omp_get_num_threads();
+        long long tid = omp_get_thread_num();
+        long long num_threads = omp_get_num_threads();
 
-        int tamanoSubrango = (limiteSuperior - limiteInferior + 1 + num_threads - 1) / num_threads;
-        int inicio = limiteInferior + tid * tamanoSubrango;
-        int fin = min(inicio + tamanoSubrango - 1, limiteSuperior);
+        long long tamanoSubrango = (limiteSuperior - limiteInferior + 1 + num_threads - 1) / num_threads;
+        long long inicio = limiteInferior + tid * tamanoSubrango;
+        long long fin = min(inicio + tamanoSubrango - 1, limiteSuperior);
 
-        for (int i = inicio; i <= fin; ++i) {
+        for (long long i = inicio; i <= fin; ++i) {
             if (i % 2 == 0) {
                 resultado10 += i * i * i; // Suma el cubo de números pares
             }
@@ -280,19 +282,19 @@ void calcularSumatoriaParesAlCuboParalela(int limiteInferior, int limiteSuperior
 
 // *Undécima sumatoria: Sumatoria de números primos al cuadrado*
 // Función para calcular la suma de números primos al cuadrado en un rango determinado por el usuario
-void calcularSumatoriaPrimosAlCuadradoParalela(int limiteInferior, int limiteSuperior, int numHilos, int &resultado11) {
+void calcularSumatoriaPrimosAlCuadradoParalela(long long limiteInferior, long long limiteSuperior, long long numHilos, long long &resultado11) {
     resultado11 = 0;
 
     #pragma omp parallel num_threads(numHilos) reduction(+:resultado11)
     {
-        int tid = omp_get_thread_num();
-        int num_threads = omp_get_num_threads();
+        long long tid = omp_get_thread_num();
+        long long num_threads = omp_get_num_threads();
 
-        int tamanoSubrango = (limiteSuperior - limiteInferior + 1 + num_threads - 1) / num_threads;
-        int inicio = limiteInferior + tid * tamanoSubrango;
-        int fin = min(inicio + tamanoSubrango - 1, limiteSuperior);
+        long long tamanoSubrango = (limiteSuperior - limiteInferior + 1 + num_threads - 1) / num_threads;
+        long long inicio = limiteInferior + tid * tamanoSubrango;
+        long long fin = min(inicio + tamanoSubrango - 1, limiteSuperior);
 
-        for (int i = inicio; i <= fin; ++i) {
+        for (long long i = inicio; i <= fin; ++i) {
             if (esPrimo(i)) {
                 resultado11 += i * i; // Suma el cuadrado de números primos
             }
@@ -302,30 +304,53 @@ void calcularSumatoriaPrimosAlCuadradoParalela(int limiteInferior, int limiteSup
 
 // *Duodécima sumatoria: Sumatoria de una secuencia aritmética*
 // Función para calcular la suma de una secuencia aritmética en un rango determinado por el usuario
-void calcularSumatoriaSecuenciaAritmeticaParalela(int limiteInferior, int limiteSuperior, int numHilos, int &resultado12) {
+void calcularSumatoriaSecuenciaAritmeticaParalela(long long limiteInferior, long long limiteSuperior, long long numHilos, long long &resultado12) {
     resultado12 = 0;
 
     #pragma omp parallel num_threads(numHilos) reduction(+:resultado12)
     {
-        int tid = omp_get_thread_num();
-        int num_threads = omp_get_num_threads();
+        long long tid = omp_get_thread_num();
+        long long num_threads = omp_get_num_threads();
 
-        int tamanoSubrango = (limiteSuperior - limiteInferior + 1 + num_threads - 1) / num_threads;
-        int inicio = limiteInferior + tid * tamanoSubrango;
-        int fin = min(inicio + tamanoSubrango - 1, limiteSuperior);
+        long long tamanoSubrango = (limiteSuperior - limiteInferior + 1 + num_threads - 1) / num_threads;
+        long long inicio = limiteInferior + tid * tamanoSubrango;
+        long long fin = min(inicio + tamanoSubrango - 1, limiteSuperior);
 
       
-        for (int i = inicio; i <= fin; ++i) {
+        for (long long i = inicio; i <= fin; ++i) {
             resultado12 += i; // Suma de la secuencia aritmética
         }
     }
 }
 
+// Función para verificar que la entrada sea un número entero
+int obtenerNumeroEntero() {
+    int numero;
+    bool entradaValida = false;
+    do {
+        string entrada;
+        cin >> entrada;
+        entradaValida = true;
+        for (char c : entrada) {
+            if (!isdigit(c)) {
+                entradaValida = false;
+                cout << "Entrada no válida. Ingrese un número entero: ";
+                break;
+            }
+        }
+        if (entradaValida) {
+            //stoi convierte un string a un int
+            numero = stoi(entrada);
+        }
+    } while (!entradaValida);
+    return numero;
+}
+
 // Función principal
 int main() {
     // Se declaran las variables necesarias
-    int limiteInferior, limiteSuperior, resultado1 = 0, resultado2 = 0, resultado3 = 0, resultado4 = 0, resultado5 = 0, resultado6 = 0, resultado7 = 0, resultado8 = 0, resultado9 = 0, resultado10 = 0, resultado11 = 0, resultados12 = 0;
-    int numHilos;
+    long long limiteInferior, limiteSuperior, resultado1 = 0, resultado2 = 0, resultado3 = 0, resultado4 = 0, resultado5 = 0, resultado6 = 0, resultado7 = 0, resultado8 = 0, resultado9 = 0, resultado10 = 0, resultado11 = 0, resultados12 = 0;
+    long long numHilos;
 
     // Se imprimen los mensajes de bienvenida y las sumatorias a calcular
     cout << endl;
@@ -351,16 +376,16 @@ int main() {
     // Se piden los límites superior e inferior de las sumatorias
 
     cout << "Ingrese el límite inferior: " << endl;
-    cin >> limiteInferior;
+    limiteInferior = obtenerNumeroEntero();
     cout << endl;
 
     cout << "Ingrese el límite superior: " << endl;
-    cin >> limiteSuperior;
+    limiteSuperior = obtenerNumeroEntero();
     cout << endl;
 
     // Se pide el número de hilos
     cout << "Ingrese el número de hilos: ";
-    cin >> numHilos;
+    numHilos = obtenerNumeroEntero();
     cout << endl;
 
     // Se calcula el tiempo de ejecución de cada sumatoria
@@ -416,22 +441,23 @@ int main() {
     #pragma omp barrier
 
    // Se calcula el tiempo de ejecución de cada sumatoria
-    double elapsed_time_factoriales = (double)(end_time_factoriales - start_time_factoriales) / CLOCKS_PER_SEC;
-    double duration_potencias_cuadradas = (double)(end_time_potencias_cuadradas - start_time_potencias_cuadradas) / CLOCKS_PER_SEC;
-    double duration_cubos = (double)(end_time_cubos - start_time_cubos) / CLOCKS_PER_SEC;
-    double duration_pares = (double)(end_time_pares - start_time_pares) / CLOCKS_PER_SEC;
-    double duration_impares = (double)(end_time_impares - start_time_impares) / CLOCKS_PER_SEC;
-    double duration_fibonacci = (double)(end_time_fibonacci - start_time_fibonacci) / CLOCKS_PER_SEC;
-    double duration_primos = (double)(end_time_primos - start_time_primos) / CLOCKS_PER_SEC;
-    double duration_pares_cuadrado = (double)(end_time_pares_cuadrado - start_time_pares_cuadrado) / CLOCKS_PER_SEC;
-    double duration_impares_cubo = (double)(end_time_impares_cubo - start_time_impares_cubo) / CLOCKS_PER_SEC;
-    double duration_pares_cubo = (double)(end_time_pares_cubo - start_time_pares_cubo) / CLOCKS_PER_SEC;
-    double duration_primos_cuadrado = (double)(end_time_primos_cuadrado - start_time_primos_cuadrado) / CLOCKS_PER_SEC;
-    double duration_secuencia_aritmetica = (double)(end_time_secuencia_aritmetica - start_time_secuencia_aritmetica) / CLOCKS_PER_SEC;
+    double elapsed_time_factoriales = (end_time_factoriales - start_time_factoriales) / CLOCKS_PER_SEC;
+    double duration_potencias_cuadradas = (end_time_potencias_cuadradas - start_time_potencias_cuadradas) / CLOCKS_PER_SEC;
+    double duration_cubos = (end_time_cubos - start_time_cubos) / CLOCKS_PER_SEC;
+    double duration_pares = (end_time_pares - start_time_pares) / CLOCKS_PER_SEC;
+    double duration_impares = (end_time_impares - start_time_impares) / CLOCKS_PER_SEC;
+    double duration_fibonacci = (end_time_fibonacci - start_time_fibonacci) / CLOCKS_PER_SEC;
+    double duration_primos = (end_time_primos - start_time_primos) / CLOCKS_PER_SEC;
+    double duration_pares_cuadrado = (end_time_pares_cuadrado - start_time_pares_cuadrado) / CLOCKS_PER_SEC;
+    double duration_impares_cubo = (end_time_impares_cubo - start_time_impares_cubo) / CLOCKS_PER_SEC;
+    double duration_pares_cubo = (end_time_pares_cubo - start_time_pares_cubo) / CLOCKS_PER_SEC;
+    double duration_primos_cuadrado = (end_time_primos_cuadrado - start_time_primos_cuadrado) / CLOCKS_PER_SEC;
+    double duration_secuencia_aritmetica = (end_time_secuencia_aritmetica - start_time_secuencia_aritmetica) / CLOCKS_PER_SEC;
 
     #pragma omp barrier
 
     // Se imprimen los avisos o mensajes de todos los calculos terminados
+    
     cout << "La sumatoria de factoriales de " << limiteInferior << " a " << limiteSuperior << " es: " << resultado1 << endl;
     cout << "Tiempo de cálculo de factoriales: " << elapsed_time_factoriales << " segundos" << endl;
     cout << endl;
