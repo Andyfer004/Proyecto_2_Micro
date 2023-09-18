@@ -123,7 +123,7 @@ void calcularSumatoriaParesParalela(int limiteInferior, int limiteSuperior, int 
 void calcularSumatoriaImparesParalela(int limiteInferior, int limiteSuperior, int numHilos, int &resultado5) {
     resultado5 = 0;
 
-    #pragma omp parallel num_threads(numHilos) reduction(+:resultado)
+    #pragma omp parallel num_threads(numHilos) reduction(+:resultado5)
     {
         int tid = omp_get_thread_num();
         int num_threads = omp_get_num_threads();
