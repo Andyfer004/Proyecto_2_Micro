@@ -349,7 +349,7 @@ int main() {
     cout << endl;
 
     // Se piden los límites superior e inferior de las sumatorias
-    cout << "Ingrese el límite superior: ";
+    cout << "Ingrese el límite superior: " << endl;
     cin >> limiteSuperior;
     cout << endl;
 
