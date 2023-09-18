@@ -349,12 +349,13 @@ int main() {
     cout << endl;
 
     // Se piden los límites superior e inferior de las sumatorias
-    cout << "Ingrese el límite superior: " << endl;
-    cin >> limiteSuperior;
-    cout << endl;
 
     cout << "Ingrese el límite inferior: " << endl;
     cin >> limiteInferior;
+    cout << endl;
+
+    cout << "Ingrese el límite superior: " << endl;
+    cin >> limiteSuperior;
     cout << endl;
 
     // Se pide el número de hilos
