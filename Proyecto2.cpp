@@ -455,58 +455,58 @@ int main() {
     #pragma omp barrier
 
    // Se calcula el tiempo de ejecución de cada sumatoria
-    double elapsed_time_factoriales = std::chrono::duration_cast<std::chrono::microseconds>(end_time_factoriales - start_time_factoriales).count();
-    double duration_potencias_cuadradas = std::chrono::duration_cast<std::chrono::microseconds>(end_time_potencias_cuadradas - start_time_potencias_cuadradas).count();
-    double duration_cubos = std::chrono::duration_cast<std::chrono::microseconds>(end_time_cubos - start_time_cubos).count();
-    double duration_pares = std::chrono::duration_cast<std::chrono::microseconds>(end_time_pares - start_time_pares).count();
-    double duration_impares = std::chrono::duration_cast<std::chrono::microseconds>(end_time_impares - start_time_impares).count();
-    double duration_fibonacci = std::chrono::duration_cast<std::chrono::microseconds>(end_time_fibonacci - start_time_fibonacci).count();
-    double duration_primos = std::chrono::duration_cast<std::chrono::microseconds> (end_time_primos - start_time_primos).count();
-    double duration_pares_cuadrado =std::chrono::duration_cast<std::chrono::microseconds> (end_time_pares_cuadrado - start_time_pares_cuadrado).count();
-    double duration_impares_cubo =std::chrono::duration_cast<std::chrono::microseconds> (end_time_impares_cubo - start_time_impares_cubo).count();
-    double duration_pares_cubo = std::chrono::duration_cast<std::chrono::microseconds>(end_time_pares_cubo - start_time_pares_cubo).count();
-    double duration_primos_cuadrado = std::chrono::duration_cast<std::chrono::microseconds>(end_time_primos_cuadrado - start_time_primos_cuadrado).count();
-    double duration_secuencia_aritmetica =std::chrono::duration_cast<std::chrono::microseconds> (end_time_secuencia_aritmetica - start_time_secuencia_aritmetica).count();
+    double elapsed_time_factoriales = std::chrono::duration_cast<std::chrono::nanoseconds>(end_time_factoriales - start_time_factoriales).count();
+    double duration_potencias_cuadradas = std::chrono::duration_cast<std::chrono::nanoseconds>(end_time_potencias_cuadradas - start_time_potencias_cuadradas).count();
+    double duration_cubos = std::chrono::duration_cast<std::chrono::nanoseconds>(end_time_cubos - start_time_cubos).count();
+    double duration_pares = std::chrono::duration_cast<std::chrono::nanoseconds>(end_time_pares - start_time_pares).count();
+    double duration_impares = std::chrono::duration_cast<std::chrono::nanoseconds>(end_time_impares - start_time_impares).count();
+    double duration_fibonacci = std::chrono::duration_cast<std::chrono::nanoseconds>(end_time_fibonacci - start_time_fibonacci).count();
+    double duration_primos = std::chrono::duration_cast<std::chrono::nanoseconds> (end_time_primos - start_time_primos).count();
+    double duration_pares_cuadrado =std::chrono::duration_cast<std::chrono::nanoseconds> (end_time_pares_cuadrado - start_time_pares_cuadrado).count();
+    double duration_impares_cubo =std::chrono::duration_cast<std::chrono::nanoseconds> (end_time_impares_cubo - start_time_impares_cubo).count();
+    double duration_pares_cubo = std::chrono::duration_cast<std::chrono::nanoseconds>(end_time_pares_cubo - start_time_pares_cubo).count();
+    double duration_primos_cuadrado = std::chrono::duration_cast<std::chrono::nanoseconds>(end_time_primos_cuadrado - start_time_primos_cuadrado).count();
+    double duration_secuencia_aritmetica =std::chrono::duration_cast<std::chrono::nanoseconds> (end_time_secuencia_aritmetica - start_time_secuencia_aritmetica).count();
 
     #pragma omp barrier
 
     // Se imprimen los avisos o mensajes de todos los calculos terminados
     
     cout << "La sumatoria de factoriales de " << limiteInferior << " a " << limiteSuperior << " es: " << resultado1 << endl;
-    cout << "Tiempo de cálculo de factoriales: " << elapsed_time_factoriales << " microsegundos" << endl;
+    cout << "Tiempo de cálculo de factoriales: " << elapsed_time_factoriales << "nanosegundos" << endl;
     cout << endl;
     cout << "La sumatoria de potencias cuadradas de " << limiteInferior << " a " << limiteSuperior << " es: " << resultado2 << endl;
-    cout << "Tiempo de cálculo de potencias cuadradas: " << duration_potencias_cuadradas << " microsegundos" << endl;
+    cout << "Tiempo de cálculo de potencias cuadradas: " << duration_potencias_cuadradas << " nanosegundos" << endl;
     cout << endl;
     cout << "La sumatoria de cubos de " << limiteInferior << " a " << limiteSuperior << " es: " << resultado3 << endl;
-    cout << "Tiempo de cálculo de cubos: " << duration_cubos << " microsegundos" << endl;
+    cout << "Tiempo de cálculo de cubos: " << duration_cubos << " nanosegundos" << endl;
     cout << endl;
     cout << "La sumatoria de números pares de " << limiteInferior << " a " << limiteSuperior << " es: " << resultado4 << endl;
-    cout << "Tiempo de cálculo de números pares: " << duration_pares << " microsegundos" << endl;
+    cout << "Tiempo de cálculo de números pares: " << duration_pares << " nanosegundos" << endl;
     cout << endl;
     cout << "La sumatoria de números impares de " << limiteInferior << " a " << limiteSuperior << " es: " << resultado5 << endl;
-    cout << "Tiempo de cálculo de números impares: " << duration_impares << " microsegundos" << endl;
+    cout << "Tiempo de cálculo de números impares: " << duration_impares << " nanosegundos" << endl;
     cout << endl;
     cout << "La sumatoria de fibonacci de " << limiteInferior << " a " << limiteSuperior << " es: " << resultado6 << endl;
     cout << "Tiempo de cálculo de fibonacci: " << duration_fibonacci << " microsegundos" << endl;
     cout << endl;
     cout << "La sumatoria de números primos de " << limiteInferior << " a " << limiteSuperior << " es: " << resultado7 << endl;
-    cout << "Tiempo de cálculo de números primos: " << duration_primos << " microsegundos" << endl;
+    cout << "Tiempo de cálculo de números primos: " << duration_primos << " nanosegundos" << endl;
     cout << endl;
     cout << "La sumatoria de números pares al cuadrado de " << limiteInferior << " a " << limiteSuperior << " es: " << resultado8 << endl;
-    cout << "Tiempo de cálculo de números pares al cuadrado: " << duration_pares_cuadrado << " microsegundos" << endl;
+    cout << "Tiempo de cálculo de números pares al cuadrado: " << duration_pares_cuadrado << " nanosegundos" << endl;
     cout << endl;
     cout << "La sumatoria de números impares al cubo de " << limiteInferior << " a " << limiteSuperior << " es: " << resultado9 << endl;
-    cout << "Tiempo de cálculo de números impares al cubo: " << duration_impares_cubo << " microsegundos" << endl;
+    cout << "Tiempo de cálculo de números impares al cubo: " << duration_impares_cubo << " nanosegundos" << endl;
     cout << endl;
     cout << "La sumatoria de números pares al cubo de " << limiteInferior << " a " << limiteSuperior << " es: " << resultado10 << endl;
-    cout << "Tiempo de cálculo de números pares al cubo: " << duration_pares_cubo << " microsegundos" << endl;
+    cout << "Tiempo de cálculo de números pares al cubo: " << duration_pares_cubo << " nanosegundos" << endl;
     cout << endl;
     cout << "La sumatoria de números primos al cuadrado de " << limiteInferior << " a " << limiteSuperior << " es: " << resultado11 << endl;
-    cout << "Tiempo de cálculo de números primos al cuadrado: " << duration_primos_cuadrado << " microsegundos" << endl;
+    cout << "Tiempo de cálculo de números primos al cuadrado: " << duration_primos_cuadrado << " nanosegundos" << endl;
     cout << endl;
     cout << "La sumatoria de una secuencia aritmética de " << limiteInferior << " a " << limiteSuperior << " es: " << resultados12 << endl;
-    cout << "Tiempo de cálculo de una secuencia aritmética: " << duration_secuencia_aritmetica << " microsegundos" << endl;
+    cout << "Tiempo de cálculo de una secuencia aritmética: " << duration_secuencia_aritmetica << " nanosegundos" << endl;
     cout << endl;
     long long sumaResultados = resultado1 + resultado2 + resultado3 + resultado4 + resultado5 +
                           resultado6 + resultado7 + resultado8 + resultado9 + resultado10 +
