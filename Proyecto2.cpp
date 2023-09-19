@@ -27,6 +27,14 @@
 
 using namespace std;
 
+long long encontrarMenor(long long a, long long b) {
+    return (a < b) ? a : b;
+}
+
+long long encontrarMayor(long long a, long long b) {
+    return (a > b) ? a : b;
+}
+
 // Función para calcular el factorial de un número
 long long calcularFactorial(long long n) {
     long long factorial = 1;
@@ -494,5 +502,46 @@ int main() {
     cout << "La sumatoria de una secuencia aritmética de " << limiteInferior << " a " << limiteSuperior << " es: " << resultados12 << endl;
     cout << "Tiempo de cálculo de una secuencia aritmética: " << duration_secuencia_aritmetica << " segundos" << endl;
     cout << endl;
+    long long sumaResultados = resultado1 + resultado2 + resultado3 + resultado4 + resultado5 +
+                          resultado6 + resultado7 + resultado8 + resultado9 + resultado10 +
+                          resultado11 + resultados12;
+
+    // Calcular el promedio
+    double promedio = static_cast<double>(sumaResultados) / 12.0;
+
+    cout << "El promedio de las sumatorias es: " << promedio << endl;
+
+    long long mayor = resultado1;
+
+    mayor = encontrarMayor(mayor, resultado2);
+    mayor = encontrarMayor(mayor, resultado3);
+    mayor = encontrarMayor(mayor, resultado4);
+    mayor = encontrarMayor(mayor, resultado5);
+    mayor = encontrarMayor(mayor, resultado6);
+    mayor = encontrarMayor(mayor, resultado7);
+    mayor = encontrarMayor(mayor, resultado8);
+    mayor = encontrarMayor(mayor, resultado9);
+    mayor = encontrarMayor(mayor, resultado10);
+    mayor = encontrarMayor(mayor, resultado11);
+    mayor = encontrarMayor(mayor, resultados12);
+
+    cout <<endl;
+    cout << "El mayor de los resultados es: " << mayor << endl;
+    cout << endl;
+    long long menor = resultado1;
+
+    menor = encontrarMenor(menor, resultado2);
+    menor = encontrarMenor(menor, resultado3);
+    menor = encontrarMenor(menor, resultado4);
+    menor = encontrarMenor(menor, resultado5);
+    menor = encontrarMenor(menor, resultado6);
+    menor = encontrarMenor(menor, resultado7);
+    menor = encontrarMenor(menor, resultado8);
+    menor = encontrarMenor(menor, resultado9);
+    menor = encontrarMenor(menor, resultado10);
+    menor = encontrarMenor(menor, resultado11);
+    menor = encontrarMenor(menor, resultados12);
+
+    cout << "El menor de los resultados es: " << menor << endl;
     return 0;
 }
