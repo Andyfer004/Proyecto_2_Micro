@@ -27,14 +27,6 @@
 
 using namespace std;
 
-long long encontrarMenor(long long a, long long b) {
-    return (a < b) ? a : b;
-}
-
-long long encontrarMayor(long long a, long long b) {
-    return (a > b) ? a : b;
-}
-
 // Función para calcular el factorial de un número
 long long calcularFactorial(long long n) {
     long long factorial = 1;
@@ -352,6 +344,16 @@ int obtenerNumeroEntero() {
         }
     } while (!entradaValida);
     return numero;
+}
+
+
+// Funciones para encontrar el menor y el mayor de los resultados
+long long encontrarMenor(long long a, long long b) {
+    return (a < b) ? a : b;
+}
+
+long long encontrarMayor(long long a, long long b) {
+    return (a > b) ? a : b;
 }
 
 // Función principal
