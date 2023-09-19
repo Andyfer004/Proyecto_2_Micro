@@ -331,6 +331,7 @@ int obtenerNumeroEntero() {
         string entrada;
         cin >> entrada;
         entradaValida = true;
+        // Verifica que cada caracter de la entrada sea un dígito
         for (char c : entrada) {
             if (!isdigit(c)) {
                 entradaValida = false;
@@ -338,11 +339,13 @@ int obtenerNumeroEntero() {
                 break;
             }
         }
+        // Si la entrada es válida, se convierte a un int
         if (entradaValida) {
             //stoi convierte un string a un int
             numero = stoi(entrada);
         }
     } while (!entradaValida);
+    
     return numero;
 }
 
