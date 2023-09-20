@@ -25,6 +25,7 @@
 #include <time.h>
 #include <cctype>
 
+// Se utiliza el espacio de nombres std
 using namespace std;
 
 // Función para calcular el factorial de un número
@@ -41,17 +42,23 @@ long long calcularFactorial(long long n) {
 void calcularSumatoriaFactorialesParalela(long long limiteInferior, long long limiteSuperior, long long numHilos, long long &resultado1) {
     resultado1 = 0;
 
+    // Se crea un bloque paralelo con el número de hilos especificado por el usuario
     #pragma omp parallel num_threads(numHilos) reduction(+:resultado1)
     {
+        // Se obtiene el id del hilo y el número de hilos
         long long tid = omp_get_thread_num();
         long long num_threads = omp_get_num_threads();
 
+        // Se calcula el tamaño del subrango de cada hilo, el subrango sirve para dividir el rango de la sumatoria en partes iguales
         long long tamanoSubrango = (limiteSuperior - limiteInferior + 1 + num_threads - 1) / num_threads;
+        // Se calcula el inicio y el fin del subrango de cada hilo
         long long inicio = limiteInferior + tid * tamanoSubrango;
         long long fin = min(inicio + tamanoSubrango - 1, limiteSuperior);
 
+        // Se calcula la sumatoria de factoriales en el subrango de cada hilo
         for (long long i = inicio; i <= fin; ++i) {
             long long factorial_i = calcularFactorial(i);
+            // El critical section sirve para evitar que dos hilos modifiquen la variable resultado1 al mismo tiempo
             #pragma omp critical
             resultado1 += factorial_i;
         }
@@ -79,19 +86,24 @@ void calcularSumatoriaPotenciasCuadradasParalela(long long limiteInferior, long 
 }
 
 // *Tercera sumatoria: Sumatoria de cubos*
-// Funciones para calcular sumatorias adicionales en un rango determinado por el usuario
+// Función para calcular la suma de cubos en un rango determinado por el usuario
 void calcularSumatoriaCubosParalela(long long limiteInferior, long long limiteSuperior, long long numHilos, long long &resultado3) {
     resultado3 = 0;
 
+    // Se crea un bloque paralelo con el número de hilos especificado por el usuario
     #pragma omp parallel num_threads(numHilos) reduction(+:resultado3)
     {
+        // Se obtiene el id del hilo y el número de hilos
         long long tid = omp_get_thread_num();
         long long num_threads = omp_get_num_threads();
 
+        // Se calcula el tamaño del subrango de cada hilo, el subrango sirve para dividir el rango de la sumatoria en partes iguales
         long long tamanoSubrango = (limiteSuperior - limiteInferior + 1 + num_threads - 1) / num_threads;
+        // Se calcula el inicio y el fin del subrango de cada hilo
         long long inicio = limiteInferior + tid * tamanoSubrango;
         long long fin = min(inicio + tamanoSubrango - 1, limiteSuperior);
 
+        // Se calcula la sumatoria de cubos en el subrango de cada hilo
         for (long long i = inicio; i <= fin; ++i) {
             resultado3 += i * i * i; // Calcula el cubo y la suma
         }
@@ -103,15 +115,20 @@ void calcularSumatoriaCubosParalela(long long limiteInferior, long long limiteSu
 void calcularSumatoriaParesParalela(long long limiteInferior, long long limiteSuperior, long long numHilos, long long &resultado4) {
     resultado4 = 0;
 
+    // Se crea un bloque paralelo con el número de hilos especificado por el usuario
     #pragma omp parallel num_threads(numHilos) reduction(+:resultado4)
     {
+        // Se obtiene el id del hilo y el número de hilos
         long long tid = omp_get_thread_num();
         long long num_threads = omp_get_num_threads();
 
+        // Se calcula el tamaño del subrango de cada hilo, el subrango sirve para dividir el rango de la sumatoria en partes iguales
         long long tamanoSubrango = (limiteSuperior - limiteInferior + 1 + num_threads - 1) / num_threads;
+        // Se calcula el inicio y el fin del subrango de cada hilo
         long long inicio = limiteInferior + tid * tamanoSubrango;
         long long fin = min(inicio + tamanoSubrango - 1, limiteSuperior);
 
+        // Se calcula la sumatoria de números pares en el subrango de cada hilo
         for (long long i = inicio; i <= fin; ++i) {
             if (i % 2 == 0) {
                 resultado4 += i; // Suma números pares
@@ -125,15 +142,20 @@ void calcularSumatoriaParesParalela(long long limiteInferior, long long limiteSu
 void calcularSumatoriaImparesParalela(long long limiteInferior, long long limiteSuperior, long long numHilos, long long &resultado5) {
     resultado5 = 0;
 
+    // Se crea un bloque paralelo con el número de hilos especificado por el usuario
     #pragma omp parallel num_threads(numHilos) reduction(+:resultado5)
     {
+        // Se obtiene el id del hilo y el número de hilos
         long long tid = omp_get_thread_num();
         long long num_threads = omp_get_num_threads();
 
+        // Se calcula el tamaño del subrango de cada hilo, el subrango sirve para dividir el rango de la sumatoria en partes iguales
         long long tamanoSubrango = (limiteSuperior - limiteInferior + 1 + num_threads - 1) / num_threads;
+        // Se calcula el inicio y el fin del subrango de cada hilo
         long long inicio = limiteInferior + tid * tamanoSubrango;
         long long fin = min(inicio + tamanoSubrango - 1, limiteSuperior);
 
+        // Se calcula la sumatoria de números impares en el subrango de cada hilo
         for (long long i = inicio; i <= fin; ++i) {
             if (i % 2 != 0) {
                 resultado5 += i; // Suma números impares
@@ -164,15 +186,20 @@ long long calcularFibonacci(long long n) {
 void calcularSumatoriaFibonacciParalela(long long limiteInferior, long long limiteSuperior, long long numHilos, long long &resultado6) {
     resultado6 = 0;
 
+    // Se crea un bloque paralelo con el número de hilos especificado por el usuario
     #pragma omp parallel num_threads(numHilos) reduction(+:resultado6)
     {
+        // Se obtiene el id del hilo y el número de hilos
         long long tid = omp_get_thread_num();
         long long num_threads = omp_get_num_threads();
 
+        // Se calcula el tamaño del subrango de cada hilo, el subrango sirve para dividir el rango de la sumatoria en partes iguales
         long long tamanoSubrango = (limiteSuperior - limiteInferior + 1 + num_threads - 1) / num_threads;
+        // Se calcula el inicio y el fin del subrango de cada hilo
         long long inicio = limiteInferior + tid * tamanoSubrango;
         long long fin = min(inicio + tamanoSubrango - 1, limiteSuperior);
 
+        // Se calcula la sumatoria de fibonacci en el subrango de cada hilo
         for (long long i = inicio; i <= fin; ++i) {
             resultado6 += calcularFibonacci(i);
         }
@@ -197,15 +224,20 @@ bool esPrimo(long long n) {
 void calcularSumatoriaPrimosParalela(long long limiteInferior, long long limiteSuperior, long long numHilos, long long &resultado7) {
     resultado7 = 0;
 
+    // Se crea un bloque paralelo con el número de hilos especificado por el usuario
     #pragma omp parallel num_threads(numHilos) reduction(+:resultado7)
     {
+        // Se obtiene el id del hilo y el número de hilos
         long long tid = omp_get_thread_num();
         long long num_threads = omp_get_num_threads();
 
+        // Se calcula el tamaño del subrango de cada hilo, el subrango sirve para dividir el rango de la sumatoria en partes iguales
         long long tamanoSubrango = (limiteSuperior - limiteInferior + 1 + num_threads - 1) / num_threads;
+        // Se calcula el inicio y el fin del subrango de cada hilo
         long long inicio = limiteInferior + tid * tamanoSubrango;
         long long fin = min(inicio + tamanoSubrango - 1, limiteSuperior);
 
+        // Se calcula la sumatoria de números primos en el subrango de cada hilo
         for (long long i = inicio; i <= fin; ++i) {
             if (esPrimo(i)) {
                 resultado7 += i; // Suma números primos
@@ -219,15 +251,20 @@ void calcularSumatoriaPrimosParalela(long long limiteInferior, long long limiteS
 void calcularSumatoriaParesAlCuadradoParalela(long long limiteInferior, long long limiteSuperior, long long numHilos, long long &resultado8) {
     resultado8 = 0;
 
+    // Se crea un bloque paralelo con el número de hilos especificado por el usuario
     #pragma omp parallel num_threads(numHilos) reduction(+:resultado8)
     {
+        // Se obtiene el id del hilo y el número de hilos
         long long tid = omp_get_thread_num();
         long long num_threads = omp_get_num_threads();
 
+        // Se calcula el tamaño del subrango de cada hilo, el subrango sirve para dividir el rango de la sumatoria en partes iguales
         long long tamanoSubrango = (limiteSuperior - limiteInferior + 1 + num_threads - 1) / num_threads;
+        // Se calcula el inicio y el fin del subrango de cada hilo
         long long inicio = limiteInferior + tid * tamanoSubrango;
         long long fin = min(inicio + tamanoSubrango - 1, limiteSuperior);
 
+        // Se calcula la sumatoria de números pares al cuadrado en el subrango de cada hilo
         for (long long i = inicio; i <= fin; ++i) {
             if (i % 2 == 0) {
                 resultado8 += i * i; // Suma el cuadrado de números pares
@@ -241,15 +278,20 @@ void calcularSumatoriaParesAlCuadradoParalela(long long limiteInferior, long lon
 void calcularSumatoriaImparesAlCuboParalela(long long limiteInferior, long long limiteSuperior, long long numHilos, long long &resultado9) {
     resultado9 = 0;
 
+    // Se crea un bloque paralelo con el número de hilos especificado por el usuario
     #pragma omp parallel num_threads(numHilos) reduction(+:resultado9)
     {
+        // Se obtiene el id del hilo y el número de hilos
         long long tid = omp_get_thread_num();
         long long num_threads = omp_get_num_threads();
 
+        // Se calcula el tamaño del subrango de cada hilo, el subrango sirve para dividir el rango de la sumatoria en partes iguales
         long long tamanoSubrango = (limiteSuperior - limiteInferior + 1 + num_threads - 1) / num_threads;
+        // Se calcula el inicio y el fin del subrango de cada hilo
         long long inicio = limiteInferior + tid * tamanoSubrango;
         long long fin = min(inicio + tamanoSubrango - 1, limiteSuperior);
-
+        
+        // Se calcula la sumatoria de números impares al cubo en el subrango de cada hilo
         for (long long i = inicio; i <= fin; ++i) {
             if (i % 2 != 0) {
                 resultado9 += i * i * i; // Suma el cubo de números impares
@@ -263,15 +305,20 @@ void calcularSumatoriaImparesAlCuboParalela(long long limiteInferior, long long 
 void calcularSumatoriaParesAlCuboParalela(long long limiteInferior, long long limiteSuperior, long long numHilos, long long &resultado10) {
     resultado10 = 0;
 
+    // Se crea un bloque paralelo con el número de hilos especificado por el usuario
     #pragma omp parallel num_threads(numHilos) reduction(+:resultado10)
     {
+        // Se obtiene el id del hilo y el número de hilos
         long long tid = omp_get_thread_num();
         long long num_threads = omp_get_num_threads();
 
+        // Se calcula el tamaño del subrango de cada hilo, el subrango sirve para dividir el rango de la sumatoria en partes iguales
         long long tamanoSubrango = (limiteSuperior - limiteInferior + 1 + num_threads - 1) / num_threads;
+        // Se calcula el inicio y el fin del subrango de cada hilo
         long long inicio = limiteInferior + tid * tamanoSubrango;
         long long fin = min(inicio + tamanoSubrango - 1, limiteSuperior);
 
+        // Se calcula la sumatoria de números pares al cubo en el subrango de cada hilo
         for (long long i = inicio; i <= fin; ++i) {
             if (i % 2 == 0) {
                 resultado10 += i * i * i; // Suma el cubo de números pares
@@ -285,15 +332,20 @@ void calcularSumatoriaParesAlCuboParalela(long long limiteInferior, long long li
 void calcularSumatoriaPrimosAlCuadradoParalela(long long limiteInferior, long long limiteSuperior, long long numHilos, long long &resultado11) {
     resultado11 = 0;
 
+    // Se crea un bloque paralelo con el número de hilos especificado por el usuario
     #pragma omp parallel num_threads(numHilos) reduction(+:resultado11)
     {
+        // Se obtiene el id del hilo y el número de hilos
         long long tid = omp_get_thread_num();
         long long num_threads = omp_get_num_threads();
 
+        // Se calcula el tamaño del subrango de cada hilo, el subrango sirve para dividir el rango de la sumatoria en partes iguales
         long long tamanoSubrango = (limiteSuperior - limiteInferior + 1 + num_threads - 1) / num_threads;
+        // Se calcula el inicio y el fin del subrango de cada hilo
         long long inicio = limiteInferior + tid * tamanoSubrango;
         long long fin = min(inicio + tamanoSubrango - 1, limiteSuperior);
 
+        // Se calcula la sumatoria de números primos al cuadrado en el subrango de cada hilo
         for (long long i = inicio; i <= fin; ++i) {
             if (esPrimo(i)) {
                 resultado11 += i * i; // Suma el cuadrado de números primos
@@ -307,16 +359,20 @@ void calcularSumatoriaPrimosAlCuadradoParalela(long long limiteInferior, long lo
 void calcularSumatoriaSecuenciaAritmeticaParalela(long long limiteInferior, long long limiteSuperior, long long numHilos, long long &resultado12) {
     resultado12 = 0;
 
+    // Se crea un bloque paralelo con el número de hilos especificado por el usuario
     #pragma omp parallel num_threads(numHilos) reduction(+:resultado12)
     {
+        // Se obtiene el id del hilo y el número de hilos
         long long tid = omp_get_thread_num();
         long long num_threads = omp_get_num_threads();
 
+        // Se calcula el tamaño del subrango de cada hilo, el subrango sirve para dividir el rango de la secuencia en partes iguales
         long long tamanoSubrango = (limiteSuperior - limiteInferior + 1 + num_threads - 1) / num_threads;
+        // Se calcula el inicio y el fin del subrango de cada hilo
         long long inicio = limiteInferior + tid * tamanoSubrango;
         long long fin = min(inicio + tamanoSubrango - 1, limiteSuperior);
 
-      
+        // Se calcula la sumatoria de una secuencia aritmética en el subrango de cada hilo
         for (long long i = inicio; i <= fin; ++i) {
             resultado12 += i; // Suma de la secuencia aritmética
         }
@@ -328,11 +384,13 @@ int obtenerNumeroEntero() {
     int numero;
     bool entradaValida = false;
     do {
+        // Obtiene la entrada del usuario
         string entrada;
         cin >> entrada;
         entradaValida = true;
         // Verifica que cada caracter de la entrada sea un dígito
         for (char c : entrada) {
+            // Si no es un dígito, se marca la entrada como inválida y se muestra un mensaje de error
             if (!isdigit(c)) {
                 entradaValida = false;
                 cout << "Entrada no válida. Ingrese un número entero: ";
@@ -344,6 +402,7 @@ int obtenerNumeroEntero() {
             //stoi convierte un string a un int
             numero = stoi(entrada);
         }
+        // Se repite el ciclo hasta que la entrada sea válida
     } while (!entradaValida);
     
     return numero;
@@ -352,10 +411,12 @@ int obtenerNumeroEntero() {
 
 // Funciones para encontrar el menor y el mayor de los resultados
 long long encontrarMenor(long long a, long long b) {
+    // Si a es menor que b, devuelve a, de lo contrario devuelve b
     return (a < b) ? a : b;
 }
 
 long long encontrarMayor(long long a, long long b) {
+    // Si a es mayor que b, devuelve a, de lo contrario devuelve b
     return (a > b) ? a : b;
 }
 
@@ -452,6 +513,7 @@ int main() {
     calcularSumatoriaSecuenciaAritmeticaParalela(limiteInferior, limiteSuperior, numHilos, resultados12);
     auto end_time_secuencia_aritmetica = chrono::high_resolution_clock::now();
 
+    // Se espera a que todos los hilos terminen de calcular sus sumatorias
     #pragma omp barrier
 
    // Se calcula el tiempo de ejecución de cada sumatoria
@@ -468,10 +530,11 @@ int main() {
     double duration_primos_cuadrado = chrono::duration_cast<chrono::nanoseconds>(end_time_primos_cuadrado - start_time_primos_cuadrado).count();
     double duration_secuencia_aritmetica =chrono::duration_cast<chrono::nanoseconds> (end_time_secuencia_aritmetica - start_time_secuencia_aritmetica).count();
 
+    // Se espera a que todos los hilos terminen de calcular sus sumatorias
     #pragma omp barrier
 
     // Se imprimen los avisos o mensajes de todos los calculos terminados
-    
+
     cout << "La sumatoria de factoriales de " << limiteInferior << " a " << limiteSuperior << " es: " << resultado1 << endl;
     cout << "Tiempo de cálculo de factoriales: " << elapsed_time_factoriales << "nanosegundos" << endl;
     cout << endl;
@@ -515,8 +578,11 @@ int main() {
     // Calcular el promedio
     double promedio = static_cast<double>(sumaResultados) / 12.0;
 
+    // Imprimir el promedio
     cout << "El promedio de las sumatorias es: " << promedio << endl;
 
+
+    // Se calcula el mayor de las sumatorias
     long long mayor = resultado1;
 
     mayor = encontrarMayor(mayor, resultado2);
@@ -531,9 +597,12 @@ int main() {
     mayor = encontrarMayor(mayor, resultado11);
     mayor = encontrarMayor(mayor, resultados12);
 
+    // Se imprime el mayor de las sumatorias
     cout <<endl;
     cout << "El mayor de los resultados es: " << mayor << endl;
     cout << endl;
+
+    // Se calcula el menor de las sumatorias
     long long menor = resultado1;
 
     menor = encontrarMenor(menor, resultado2);
@@ -548,6 +617,7 @@ int main() {
     menor = encontrarMenor(menor, resultado11);
     menor = encontrarMenor(menor, resultados12);
 
+    // Se imprime el menor de las sumatorias
     cout << "El menor de los resultados es: " << menor << endl;
     return 0;
 }
