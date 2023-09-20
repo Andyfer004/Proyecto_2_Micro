@@ -403,70 +403,70 @@ int main() {
 
     // Se calcula el tiempo de ejecución de cada sumatoria
 
-    auto start_time_factoriales = std::chrono::high_resolution_clock::now();
+    auto start_time_factoriales = chrono::high_resolution_clock::now();
     calcularSumatoriaFactorialesParalela(limiteInferior, limiteSuperior, numHilos, resultado1);
-    auto end_time_factoriales = std::chrono::high_resolution_clock::now();
+    auto end_time_factoriales = chrono::high_resolution_clock::now();
 
-    auto start_time_potencias_cuadradas = std::chrono::high_resolution_clock::now();
+    auto start_time_potencias_cuadradas = chrono::high_resolution_clock::now();
     calcularSumatoriaPotenciasCuadradasParalela(limiteInferior, limiteSuperior, numHilos, resultado2);
-    auto end_time_potencias_cuadradas = std::chrono::high_resolution_clock::now();
+    auto end_time_potencias_cuadradas = chrono::high_resolution_clock::now();
 
 
-    auto start_time_cubos = std::chrono::high_resolution_clock::now();
+    auto start_time_cubos = chrono::high_resolution_clock::now();
     calcularSumatoriaCubosParalela(limiteInferior, limiteSuperior, numHilos, resultado3);
-    auto end_time_cubos = std::chrono::high_resolution_clock::now();
+    auto end_time_cubos = chrono::high_resolution_clock::now();
 
-    auto start_time_pares = std::chrono::high_resolution_clock::now();
+    auto start_time_pares = chrono::high_resolution_clock::now();
     calcularSumatoriaParesParalela(limiteInferior, limiteSuperior, numHilos, resultado4);
-    auto end_time_pares = std::chrono::high_resolution_clock::now();
+    auto end_time_pares = chrono::high_resolution_clock::now();
 
-    auto start_time_impares = std::chrono::high_resolution_clock::now();
+    auto start_time_impares = chrono::high_resolution_clock::now();
     calcularSumatoriaImparesParalela(limiteInferior, limiteSuperior, numHilos, resultado5);
-    auto end_time_impares = std::chrono::high_resolution_clock::now();
+    auto end_time_impares = chrono::high_resolution_clock::now();
 
-    auto start_time_fibonacci = std::chrono::high_resolution_clock::now();
+    auto start_time_fibonacci = chrono::high_resolution_clock::now();
     calcularSumatoriaFibonacciParalela(limiteInferior, limiteSuperior, numHilos, resultado6);
-    auto end_time_fibonacci = std::chrono::high_resolution_clock::now();
+    auto end_time_fibonacci = chrono::high_resolution_clock::now();
 
-    auto start_time_primos = std::chrono::high_resolution_clock::now();
+    auto start_time_primos = chrono::high_resolution_clock::now();
     calcularSumatoriaPrimosParalela(limiteInferior, limiteSuperior, numHilos, resultado7);
-    auto end_time_primos = std::chrono::high_resolution_clock::now();
+    auto end_time_primos = chrono::high_resolution_clock::now();
     
-    auto start_time_pares_cuadrado = std::chrono::high_resolution_clock::now();
+    auto start_time_pares_cuadrado = chrono::high_resolution_clock::now();
     calcularSumatoriaParesAlCuadradoParalela(limiteInferior, limiteSuperior, numHilos, resultado8);
-    auto end_time_pares_cuadrado = std::chrono::high_resolution_clock::now();
+    auto end_time_pares_cuadrado = chrono::high_resolution_clock::now();
 
-    auto start_time_impares_cubo = std::chrono::high_resolution_clock::now();
+    auto start_time_impares_cubo = chrono::high_resolution_clock::now();
     calcularSumatoriaImparesAlCuboParalela(limiteInferior, limiteSuperior, numHilos, resultado9);
-    auto end_time_impares_cubo = std::chrono::high_resolution_clock::now();
+    auto end_time_impares_cubo = chrono::high_resolution_clock::now();
 
-    auto start_time_pares_cubo = std::chrono::high_resolution_clock::now();
+    auto start_time_pares_cubo = chrono::high_resolution_clock::now();
     calcularSumatoriaParesAlCuboParalela(limiteInferior, limiteSuperior, numHilos, resultado10);
-    auto end_time_pares_cubo = std::chrono::high_resolution_clock::now();
+    auto end_time_pares_cubo = chrono::high_resolution_clock::now();
 
-    auto start_time_primos_cuadrado = std::chrono::high_resolution_clock::now();
+    auto start_time_primos_cuadrado = chrono::high_resolution_clock::now();
     calcularSumatoriaPrimosAlCuadradoParalela(limiteInferior, limiteSuperior, numHilos, resultado11);
-    auto end_time_primos_cuadrado = std::chrono::high_resolution_clock::now();
+    auto end_time_primos_cuadrado = chrono::high_resolution_clock::now();
 
-    auto start_time_secuencia_aritmetica = std::chrono::high_resolution_clock::now();
+    auto start_time_secuencia_aritmetica = chrono::high_resolution_clock::now();
     calcularSumatoriaSecuenciaAritmeticaParalela(limiteInferior, limiteSuperior, numHilos, resultados12);
-    auto end_time_secuencia_aritmetica = std::chrono::high_resolution_clock::now();
+    auto end_time_secuencia_aritmetica = chrono::high_resolution_clock::now();
 
     #pragma omp barrier
 
    // Se calcula el tiempo de ejecución de cada sumatoria
-    double elapsed_time_factoriales = std::chrono::duration_cast<std::chrono::nanoseconds>(end_time_factoriales - start_time_factoriales).count();
-    double duration_potencias_cuadradas = std::chrono::duration_cast<std::chrono::nanoseconds>(end_time_potencias_cuadradas - start_time_potencias_cuadradas).count();
-    double duration_cubos = std::chrono::duration_cast<std::chrono::nanoseconds>(end_time_cubos - start_time_cubos).count();
-    double duration_pares = std::chrono::duration_cast<std::chrono::nanoseconds>(end_time_pares - start_time_pares).count();
-    double duration_impares = std::chrono::duration_cast<std::chrono::nanoseconds>(end_time_impares - start_time_impares).count();
-    double duration_fibonacci = std::chrono::duration_cast<std::chrono::nanoseconds>(end_time_fibonacci - start_time_fibonacci).count();
-    double duration_primos = std::chrono::duration_cast<std::chrono::nanoseconds> (end_time_primos - start_time_primos).count();
-    double duration_pares_cuadrado =std::chrono::duration_cast<std::chrono::nanoseconds> (end_time_pares_cuadrado - start_time_pares_cuadrado).count();
-    double duration_impares_cubo =std::chrono::duration_cast<std::chrono::nanoseconds> (end_time_impares_cubo - start_time_impares_cubo).count();
-    double duration_pares_cubo = std::chrono::duration_cast<std::chrono::nanoseconds>(end_time_pares_cubo - start_time_pares_cubo).count();
-    double duration_primos_cuadrado = std::chrono::duration_cast<std::chrono::nanoseconds>(end_time_primos_cuadrado - start_time_primos_cuadrado).count();
-    double duration_secuencia_aritmetica =std::chrono::duration_cast<std::chrono::nanoseconds> (end_time_secuencia_aritmetica - start_time_secuencia_aritmetica).count();
+    double elapsed_time_factoriales = chrono::duration_cast<chrono::nanoseconds>(end_time_factoriales - start_time_factoriales).count();
+    double duration_potencias_cuadradas = chrono::duration_cast<chrono::nanoseconds>(end_time_potencias_cuadradas - start_time_potencias_cuadradas).count();
+    double duration_cubos = chrono::duration_cast<chrono::nanoseconds>(end_time_cubos - start_time_cubos).count();
+    double duration_pares = chrono::duration_cast<chrono::nanoseconds>(end_time_pares - start_time_pares).count();
+    double duration_impares = chrono::duration_cast<chrono::nanoseconds>(end_time_impares - start_time_impares).count();
+    double duration_fibonacci = chrono::duration_cast<chrono::nanoseconds>(end_time_fibonacci - start_time_fibonacci).count();
+    double duration_primos = chrono::duration_cast<chrono::nanoseconds> (end_time_primos - start_time_primos).count();
+    double duration_pares_cuadrado =chrono::duration_cast<chrono::nanoseconds> (end_time_pares_cuadrado - start_time_pares_cuadrado).count();
+    double duration_impares_cubo =chrono::duration_cast<chrono::nanoseconds> (end_time_impares_cubo - start_time_impares_cubo).count();
+    double duration_pares_cubo = chrono::duration_cast<chrono::nanoseconds>(end_time_pares_cubo - start_time_pares_cubo).count();
+    double duration_primos_cuadrado = chrono::duration_cast<chrono::nanoseconds>(end_time_primos_cuadrado - start_time_primos_cuadrado).count();
+    double duration_secuencia_aritmetica =chrono::duration_cast<chrono::nanoseconds> (end_time_secuencia_aritmetica - start_time_secuencia_aritmetica).count();
 
     #pragma omp barrier
 
